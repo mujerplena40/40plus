@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test: ¿Cuál es tu perfil metabólico? | Mujer Plena 40+</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF7F2;
+    --warm-white: #FFFDF9;
+    --bark: #3D2B1F;
+    --bark-light: #6B4E3D;
+    --sage: #6B8F71;
+    --sage-light: #A8C4AB;
+    --sage-pale: #EAF2EB;
+    --terracotta: #C4714A;
+    --terracotta-light: #F2E4DA;
+    --gold: #C9A84C;
+    --gold-pale: #F5EDD6;
+    --text-main: #2C1F16;
+    --text-secondary: #6B5548;
+    --border: #E8DDD4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse at 20% 20%, rgba(107,143,113,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(196,113,74,0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 32px 0 0;
+    text-align: center;
+  }
+
+  .brand {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 8px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 48px 0 40px;
+    text-align: center;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: var(--sage-pale);
+    border: 1px solid var(--sage-light);
+    color: var(--sage);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 6vw, 56px);
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--bark);
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    max-width: 520px;
+    margin: 0 auto 32px;
+  }
+
+  .hero-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 0 auto 40px;
+    max-width: 300px;
+  }
+
+  .hero-divider::before,
+  .hero-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .hero-divider span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--gold);
+  }
+
+  /* ── INTRO CARD ── */
+  .intro-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .intro-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--sage), var(--terracotta), var(--gold));
+  }
+
+  .intro-card p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+  }
+
+  .intro-card p:last-child { margin-bottom: 0; }
+
+  .intro-card strong { color: var(--bark); font-weight: 600; }
+
+  .how-to {
+    background: var(--sage-pale);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-top: 20px;
+  }
+
+  .how-to-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--sage);
+    margin-bottom: 12px;
+  }
+
+  .how-to ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .how-to li {
+    font-size: 14px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+  }
+
+  .how-to li::before {
+    content: '→';
+    color: var(--sage);
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── SCORE TRACKER ── */
+  .score-tracker {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .score-pill {
+    background: var(--warm-white);
+    border: 1.5px solid var(--border);
+    border-radius: 100px;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s;
+  }
+
+  .score-pill .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .score-pill.a .dot { background: var(--sage); }
+  .score-pill.b .dot { background: var(--terracotta); }
+  .score-pill.c .dot { background: var(--gold); }
+
+  .score-pill .count {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1;
+    min-width: 20px;
+    text-align: center;
+  }
+
+  .score-pill.a .count { color: var(--sage); }
+  .score-pill.b .count { color: var(--terracotta); }
+  .score-pill.c .count { color: var(--gold); }
+
+  /* ── BLOQUE SECTION ── */
+  .bloque-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .bloque-num {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--bark);
+    color: white;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .bloque-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--bark);
+  }
+
+  .bloque-sub {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  /* ── QUESTION CARD ── */
+  .question-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 20px;
+    transition: box-shadow 0.3s;
+  }
+
+  .question-card:hover {
+    box-shadow: 0 4px 24px rgba(61,43,31,0.06);
+  }
+
+  .question-num {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 10px;
+  }
+
+  .question-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--bark);
+    line-height: 1.4;
+    margin-bottom: 20px;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--cream);
+    text-align: left;
+    width: 100%;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .option:hover {
+    border-color: var(--sage-light);
+    background: var(--sage-pale);
+    transform: translateX(3px);
+  }
+
+  .option.selected-a {
+    border-color: var(--sage);
+    background: var(--sage-pale);
+  }
+
+  .option.selected-b {
+    border-color: var(--terracotta);
+    background: var(--terracotta-light);
+  }
+
+  .option.selected-c {
+    border-color: var(--gold);
+    background: var(--gold-pale);
+  }
+
+  .option-letter {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+    margin-top: 1px;
+  }
+
+  .option.selected-a .option-letter { background: var(--sage); border-color: var(--sage); color: white; }
+  .option.selected-b .option-letter { background: var(--terracotta); border-color: var(--terracotta); color: white; }
+  .option.selected-c .option-letter { background: var(--gold); border-color: var(--gold); color: white; }
+
+  .option-text {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--text-main);
+  }
+
+  /* ── SECTION SEPARATOR ── */
+  .section-sep {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 48px 0 36px;
+  }
+
+  .section-sep::before,
+  .section-sep::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── PROGRESS ── */
+  .progress-bar {
+    background: var(--border);
+    border-radius: 100px;
+    height: 4px;
+    margin-bottom: 48px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--sage), var(--terracotta));
+    border-radius: 100px;
+    width: 0%;
+    transition: width 0.5s ease;
+  }
+
+  /* ── CTA SECTION ── */
+  .cta-section {
+    background: var(--bark);
+    border-radius: 24px;
+    padding: 48px 40px;
+    margin: 48px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(107,143,113,0.15);
+  }
+
+  .cta-section::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: rgba(196,113,74,0.12);
+  }
+
+  .cta-section * { position: relative; z-index: 1; }
+
+  .cta-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    margin-bottom: 16px;
+  }
+
+  .cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 600;
+    color: white;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .cta-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .cta-body {
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.75);
+    max-width: 480px;
+    margin: 0 auto 32px;
+  }
+
+  .cta-includes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 36px;
+    text-align: left;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-include-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .cta-include-item::before {
+    content: '✓';
+    color: var(--sage-light);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .cta-price-row {
+    margin-bottom: 24px;
+  }
+
+  .cta-price-old {
+    font-size: 16px;
+    color: rgba(255,255,255,0.4);
+    text-decoration: line-through;
+    margin-bottom: 4px;
+  }
+
+  .cta-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: white;
+    line-height: 1;
+  }
+
+  .cta-price sup {
+    font-size: 24px;
+    vertical-align: super;
+  }
+
+  .cta-price-note {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 6px;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--terracotta);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 18px 40px;
+    border-radius: 100px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s;
+    letter-spacing: 0.01em;
+    box-shadow: 0 8px 32px rgba(196,113,74,0.35);
+  }
+
+  .btn-primary:hover {
+    background: #D4805A;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(196,113,74,0.45);
+  }
+
+  .cta-guarantee {
+    margin-top: 20px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* ── RESULT TEASER ── */
+  .result-teaser {
+    margin: 48px 0;
+  }
+
+  .result-teaser-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--bark);
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .result-teaser-sub {
+    font-size: 15px;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .profiles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 540px) {
+    .profiles-grid { grid-template-columns: 1fr; }
+  }
+
+  .profile-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    filter: blur(3px);
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .profile-card::after {
+    content: '🔒';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    background: rgba(250,247,242,0.6);
+    backdrop-filter: blur(1px);
+    filter: none;
+  }
+
+  .profile-card-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  .profile-card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--bark);
+    margin-bottom: 8px;
+  }
+
+  .profile-card-desc {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  .profile-card.a { border-top: 3px solid var(--sage); }
+  .profile-card.b { border-top: 3px solid var(--terracotta); }
+  .profile-card.c { border-top: 3px solid var(--gold); }
+
+  .profiles-unlock {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+
+  /* ── SUBMIT BUTTON ── */
+  .submit-section {
+    text-align: center;
+    margin: 40px 0 60px;
+  }
+
+  .btn-submit {
+    background: var(--sage);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    padding: 20px 52px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 8px 32px rgba(107,143,113,0.3);
+    letter-spacing: 0.01em;
+  }
+
+  .btn-submit:hover {
+    background: #5A7A5F;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(107,143,113,0.4);
+  }
+
+  .btn-submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .submit-note {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 12px;
+  }
+
+  /* ── RESULT SCREEN ── */
+  #result-screen {
+    display: none;
+    padding: 60px 0;
+    animation: fadeInUp 0.6s ease;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .result-profile {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 40px;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .result-profile::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+  }
+
+  .result-profile.profile-a::before { background: var(--sage); }
+  .result-profile.profile-b::before { background: var(--terracotta); }
+  .result-profile.profile-c::before { background: var(--gold); }
+
+  .result-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .profile-a .result-badge { background: var(--sage-pale); color: var(--sage); }
+  .profile-b .result-badge { background: var(--terracotta-light); color: var(--terracotta); }
+  .profile-c .result-badge { background: var(--gold-pale); color: var(--gold); }
+
+  .result-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--bark);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .result-intro {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    margin-bottom: 28px;
+  }
+
+  .result-traits {
+    margin-bottom: 28px;
+  }
+
+  .result-traits-title {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+  }
+
+  .trait-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 15px;
+    color: var(--text-main);
+    line-height: 1.5;
+  }
+
+  .trait-item:last-child { border-bottom: none; }
+
+  .trait-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  .profile-a .trait-dot { background: var(--sage); }
+  .profile-b .trait-dot { background: var(--terracotta); }
+  .profile-c .trait-dot { background: var(--gold); }
+
+  .result-locked {
+    background: var(--cream);
+    border: 1.5px dashed var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .result-locked-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--bark);
+    margin-bottom: 10px;
+  }
+
+  .result-locked-text {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 16px;
+  }
+
+  .lock-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .lock-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .lock-item::before {
+    content: '🔒';
+    font-size: 14px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 40px 0;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+
+  footer p {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  footer a {
+    color: var(--sage);
+    text-decoration: none;
+  }
+
+  /* ── STICKY CTA ── */
+  .sticky-cta {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--bark);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    z-index: 100;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+    box-shadow: 0 -4px 30px rgba(0,0,0,0.15);
+  }
+
+  .sticky-cta.visible { transform: translateY(0); }
+
+  .sticky-cta-text {
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.4;
+  }
+
+  .sticky-cta-text strong {
+    color: white;
+    display: block;
+    font-size: 15px;
+  }
+
+  .sticky-btn {
+    background: var(--terracotta);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 100px;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+
+  .sticky-btn:hover { background: #D4805A; }
+
+  @media (max-width: 480px) {
+    .sticky-cta { flex-direction: column; text-align: center; padding: 16px; }
+    .sticky-btn { width: 100%; text-align: center; }
+    .cta-section { padding: 36px 24px; }
+    .result-profile { padding: 28px 20px; }
+    .profiles-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="brand">Mujer Plena 40+</div>
+  </header>
+
+  <!-- ── TEST SCREEN ── -->
+  <div id="test-screen">
+
+    <div class="hero">
+      <div class="hero-badge">Test gratuito</div>
+      <h1>¿Cuál es tu <em>perfil metabólico</em>?</h1>
+      <p class="hero-sub">15 preguntas para entender por qué tu cuerpo responde como responde — y qué estrategia funciona mejor para vos ahora mismo.</p>
+      <div class="hero-divider"><span>✦</span></div>
+    </div>
+
+    <div class="intro-card">
+      <p>No todas las mujeres de 40+ tienen el mismo metabolismo. Lo que frena a una puede no ser lo que frena a otra. Este test identifica tu perfil dominante para que puedas actuar con precisión en lugar de seguir intentando todo sin saber qué aplica a tu caso.</p>
+      <p>Respondé con honestidad según cómo te sentiste <strong>en los últimos 3 meses</strong>, no en un día puntual.</p>
+      <div class="how-to">
+        <div class="how-to-title">Cómo usar este test</div>
+        <ul>
+          <li>Elegí la opción que más se acerca a tu realidad (A, B o C)</li>
+          <li>Al final contás cuántas A, B y C obtuviste</li>
+          <li>Si empatan dos letras, tenés características de ambos perfiles</li>
+          <li>El perfil con más puntos es tu perfil dominante</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Tracker -->
+    <div class="score-tracker">
+      <div class="score-pill a"><div class="dot"></div> Perfil A <span class="count" id="count-a">0</span></div>
+      <div class="score-pill b"><div class="dot"></div> Perfil B <span class="count" id="count-b">0</span></div>
+      <div class="score-pill c"><div class="dot"></div> Perfil C <span class="count" id="count-c">0</span></div>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+
+    <!-- ── BLOQUE 1 ── -->
+    <div class="bloque-header">
+      <div class="bloque-num">1</div>
+      <div>
+        <div class="bloque-title">Energía, peso y hambre</div>
+        <div class="bloque-sub">Preguntas 1 a 5</div>
+      </div>
+    </div>
+
+    <div class="question-card" data-q="1">
+      <div class="question-num">Pregunta 1 de 15</div>
+      <div class="question-text">¿Cómo describís tu nivel de energía durante el día?</div>
+      <div class="options">
+        <button class="option" data-answer="a" onclick="selectOption(this, 1)"><span class="option-letter">A</span><span class="option-text">Tengo bajones de energía después de las comidas, especialmente al mediodía.</span></button>
+        <button class="option" data-answer="b" onclick="selectOption(this, 1)"><span class="option-letter">B</span><span class="option-text">Me siento agotada casi todo el tiempo, sin importar cuánto duerma.</span></button>
+        <button class="option" data-answer="c" onclick="selectOption(this, 1)"><span class="option-letter">C</span><span class="option-text">Mi energía varía mucho: algunos días estoy bien y otros me caigo sin razón aparente.</span></button>
+      </div>
+    </div>
+
+    <div class="question-card" data-q="2">
+      <div class="question-num">Pregunta 2 de 15</div>
+      <div class="question-text">¿Qué pasa con tu peso en los últimos años?</div>
+      <div class="options">
+        <button class="option" data-answer="a" onclick="selectOption(this, 2)"><span class="option-letter">A</span><span class="option-text">Subo de peso con facilidad, especialmente en el abdomen, aunque no coma mucho.</span></button>
+        <button class="option" data-answer="b" onclick="selectOption(this, 2)"><span class="option-letter">B</span><span class="option-text">Mi peso fluctúa, pero lo que más noto es retención de líquidos e hinchazón.</span></button>
+        <button class="option" data-answer="c" onclick="selectOption(this, 2)"><span class="option-letter">C</span><span class="option-text">El peso varía según las semanas: hay momentos que bajo y otros que sube sin razón clara.</span></button>
+      </div>
+    </div>
+
+    <div class="question-card" data-q="3">
+      <div class="question-num">Pregunta 3 de 15</div>
+      <div class="question-text">¿Cómo es tu hambre y tu relación con el apetito?</div>
+      <div class="options">
+        <button class="option" data-answer="a" onclick="selectOption(this, 3)"><span class="option-letter">A</span><span class="option-text">Tengo hambre con frecuencia aunque acabo de comer. Los antojos de dulce son intensos, sobre todo por la tarde.</span></button>
+        <button class="option" data-answer="b" onclick="selectOption(this, 3)"><span class="option-letter">B</span><span class="option-text">A veces no tengo hambre en todo el día y otras veces como sin parar. Es muy irregular.</span></button>
+        <button class="option" data-answer="c" onclick="selectOption(this, 3)"><span class="option-letter">C</span><span class="option-text">El hambre es impredecible. Hay semanas que me sacio fácil y otras que nada me llena.</span></button>
+      </div>
+    </div>
+
+    <div class="question-card" data-q="4">
+      <div class="question-num">Pregunta 4 de 15</div>
+      <div class="question-text">¿Qué notás después de comer algo alto en carbohidratos (pan, pasta, arroz)?</div>
+      <div class="options">
+        <button class="option" data-answer="a" onclick="selectOption(this, 4)"><span class="option-letter">A</span><span class="option-text">Mucho sueño, pesadez y a las 2 horas vuelvo a tener hambre.</span></button>
+        <button class="option" data-answer="b" onclick="selectOption(this, 4)"><span class="option-letter">B</span><span class="option-text">Me siento mejor emocionalmente pero físicamente pesada. Como por ansiedad más que por hambre.</span></button>
+        <button class="option" data-answer="c" onclick="selectOption(this, 4)"><span class="option-letter">C</span><span class="option-text">Depende del día y del momento del mes. No hay un patrón claro.</span></button>
+      </div>
+    </div>
+
+    <div class="question-card" data-q="5">
+      <div class="question-num">Pregunta 5 de 15</div>
+      <div class="question-text">¿Cómo describís tu abdomen habitualmente?</div>
+      <div class="options">
+        <button class="option" data-answer="a" onclick="selectOption(this, 5)"><span class="option-letter">A</span><span class="option-text">Hinchado casi todo el tiempo, especialmente al final del día. La ropa aprieta más en la tarde.</span></button>
+        <button class="option" data-answer="b" onclick="selectOption(this, 5)"><span class="option-letter">B</span><span class="option-text">Tenso y duro, con sensación de estar "llena" aunque no haya comido mucho.</span></button>
+        <button class="option" data-answer="c" onclick="selectOption(this, 5)"><span class="option-letter">C</span><span class="option-text">Variable: hay días que me veo bien y días que me siento infladísima sin haber cambiado nada.</span></button>
+      </div>
+    </div>
+
+    <!-- ── BLOQUE 2 ── -->
+    <div class="section-sep"><div class="bloque-header" style="margin:0;gap:12px"><div class="bloque-num">2</div><div><div class="bloque-title">Estrés, sueño y estado de ánimo</div><div class="bloque-sub">Preguntas 6 a 10</div></div></div></div>
+
+    <div class="question-card" data-q="6">
+      <div class="question-num">Pregunta 6 de 15</div>
+      <div class="question-text">¿Cómo es tu sueño habitualmente?</div>
+      <div class="options">
+        <button class="option" data-answer="a" onclick="selectOption(this, 6)"><span class="option-letter">A</span><span class="option-text">Duermo suficiente en horas pero me levanto cansada. No siento que el sueño me recupere.</span></button>
+        <button class="option" data-answer="b" onclick="selectOption(this, 6)"><span class="option-letter">B</span><span class="option-text">Me cuesta conciliar el sueño, me despierto de madrugada o duermo muy poco.</span></button>
+        <button class="option" data-answer="c" onclick="selectOption(this, 6)"><span class="option-letter">C</span><span class="option-text">El sueño es irregular: unas semanas bien y otras muy mal, a veces con sudores nocturnos.</span></button>
+      </div>
+    </div>
+
+    <div class="question-card" data-q="7">
+      <div class="question-num">Pregunta 7 de 15</div>
+      <div class="question-text">¿Cómo manejás el estrés cotidiano?</div>
+      <div class="options">
+        <button class="option" data-answer="a" onclick="selectOption(this, 7)"><span class="option-letter">A</span><span class="option-text">Funciono bajo estrés pero noto que como más cuando estoy ansiosa o estresada.</span></button>
+        <button class="option" data-answer="b" onclick="selectOption(this, 7)"><span class="option-letter">B</span><span class="option-text">El estrés me tiene al límite. Siento que vivo con el cuerpo en alerta permanente.</span></button>
+        <button class="option" data-answer="c" onclick="selectOption(this, 7)"><span class="option-letter">C</span><span class="option-text">Depende de la época. Hay temporadas que lo manejo bien y otras que me desborda.</span></button>
+      </div>
+    </div>
+
+    <div class="question-card" data-q="8">
+      <div class="question-num">Pregunta 8 de 15</div>
+      <div class="question-text">¿Cómo describirías tu estado de ánimo en los últimos meses?</div>
+      <div class="options">
+        <button class="option" data-answer="a" onclick="selectOption(this, 8)"><span class="option-letter">A</span><span class="option-text">Bastante estable, pero con momentos de baja energía emocional y poca motivación.</span></button>
+        <button class="option" data-answer="b" onclick="selectOption(this, 8)"><span class="option-letter">B</span><span class="option-text">Irritabilidad, ansiedad o tristeza frecuente, especialmente en ciertos momentos del mes.</span></button>
+        <button class="option" data-answer="c" onclick="selectOption(this, 8)"><span class="option-letter">C</span><span class="option-text">Muy variable. Cambios de humor que no siempre tienen una razón aparente.</span></button>
+      </div>
+    </div>
+
+    <div class="question-card" data-q="9">
+      <div class="question-num">Pregunta 9 de 15</div>
+      <div class="question-text">¿Tenés antojos frecuentes o comés por emociones?</div>
+      <div class="options">
+        <button class="option" data-answer="a" onclick="selectOption(this, 9)"><span class="option-letter">A</span><span class="option-text">Sí, especialmente de dulce o carbohidratos. Se dispara en momentos de estrés o aburrimiento.</span></button>
+        <button class="option" data-answer="b" onclick="selectOption(this, 9)"><span class="option-letter">B</span><span class="option-text">Como por ansiedad o para "calmarme". El alimento cumple una función emocional clara.</span></button>
+        <button class="option" data-answer="c" onclick="selectOption(this, 9)"><span class="option-letter">C</span><span class="option-text">A veces. Depende del momento hormonal del mes más que de una pauta fija.</span></button>
+      </div>
+    </div>
+
+    <div class="question-card" data-q="10">
+      <div class="question-num">Pregunta 10 de 15</div>
+      <div class="question-text">¿Cómo responde tu cuerpo al ejercicio físico?</div>
+      <div class="options">
+        <button class="option" data-answer="a" onclick="selectOption(this, 10)"><span class="option-letter">A</span><span class="option-text">Me siento bien con ejercicio moderado, pero el intenso me deja agotada por días.</span></button>
+        <button class="option" data-answer="b" onclick="selectOption(this, 10)"><span class="option-letter">B</span><span class="option-text">Después de entrenar a veces me siento peor: más cansada, más ansiosa, con más hambre.</span></button>
+        <button class="option" data-answer="c" onclick="selectOption(this, 10)"><span class="option-letter">C</span><span class="option-text">Variable. Hay épocas que me activa y épocas que me agota con el mismo tipo de ejercicio.</span></button>
+      </div>
+    </div>
+
+    <!-- ── BLOQUE 3 ── -->
+    <div class="section-sep"><div class="bloque-header" style="margin:0;gap:12px"><div class="bloque-num">3</div><div><div class="bloque-title">Señales hormonales</div><div class="bloque-sub">Preguntas 11 a 15</div></div></div></div>
+
+    <div class="question-card" data-q="11">
+      <div class="question-num">Pregunta 11 de 15</div>
+      <div class="question-text">¿Cómo es o era tu ciclo menstrual en los últimos años?</div>
+      <div class="options">
+        <button class="option" data-answer="a" onclick="selectOption(this, 11)"><span class="option-letter">A</span><span class="option-text">Bastante regular pero con síndrome premenstrual marcado: hinchazón, antojos, irritabilidad.</span></button>
+        <button class="option" data-answer="b" onclick="selectOption(this, 11)"><span class="option-letter">B</span><span class="option-text">Irregular, con cambios en la duración o la intensidad. A veces se adelanta o se atrasa semanas.</span></button>
+        <button class="option" data-answer="c" onclick="selectOption(this, 11)"><span class="option-letter">C</span><span class="option-text">Muy irregular o ya en proceso de menopausia. Cambios frecuentes e impredecibles.</span></button>
+      </div>
+    </div>
+
+    <div class="question-card" data-q="12">
+      <div class="question-num">Pregunta 12 de 15</div>
+      <div class="question-text">¿Experimentás sofocos, sudores nocturnos o sensaciones de calor repentino?</div>
+      <div class="options">
+        <button class="option" data-answer="a" onclick="selectOption(this, 12)"><span class="option-letter">A</span><span class="option-text">Raramente o nunca.</span></button>
+        <button class="option" data-answer="b" onclick="selectOption(this, 12)"><span class="option-letter">B</span><span class="option-text">Ocasionalmente, sobre todo en momentos de estrés.</span></button>
+        <button class="option" data-answer="c" onclick="selectOption(this, 12)"><span class="option-letter">C</span><span class="option-text">Con frecuencia, especialmente de noche o en situaciones de calor o estrés.</span></button>
+      </div>
+    </div>
+
+    <div class="question-card" data-q="13">
+      <div class="question-num">Pregunta 13 de 15</div>
+      <div class="question-text">¿Cómo están tu piel y tu cabello en los últimos tiempos?</div>
+      <div class="options">
+        <button class="option" data-answer="a" onclick="selectOption(this, 13)"><span class="option-letter">A</span><span class="option-text">La piel tiende a ser más grasa o con tendencia al acné hormonal.</span></button>
+        <button class="option" data-answer="b" onclick="selectOption(this, 13)"><span class="option-letter">B</span><span class="option-text">Piel seca, apagada, sin brillo. El cabello cae más o está más débil.</span></button>
+        <button class="option" data-answer="c" onclick="selectOption(this, 13)"><span class="option-letter">C</span><span class="option-text">Combinación: algunas zonas secas, otras grasas. El cabello está diferente pero difícil de definir.</span></button>
+      </div>
+    </div>
+
+    <div class="question-card" data-q="14">
+      <div class="question-num">Pregunta 14 de 15</div>
+      <div class="question-text">¿Tenés dificultades de concentración o "niebla mental"?</div>
+      <div class="options">
+        <button class="option" data-answer="a" onclick="selectOption(this, 14)"><span class="option-letter">A</span><span class="option-text">A veces, especialmente después de las comidas o al final del día.</span></button>
+        <button class="option" data-answer="b" onclick="selectOption(this, 14)"><span class="option-letter">B</span><span class="option-text">Con frecuencia. Me cuesta mantener el foco y la memoria no es lo que era.</span></button>
+        <button class="option" data-answer="c" onclick="selectOption(this, 14)"><span class="option-letter">C</span><span class="option-text">Por épocas. Hay semanas que estoy muy lúcida y otras que no recuerdo nada.</span></button>
+      </div>
+    </div>
+
+    <div class="question-card" data-q="15">
+      <div class="question-num">Pregunta 15 de 15</div>
+      <div class="question-text">¿Cuál de estas frases describe mejor tu situación actual?</div>
+      <div class="options">
+        <button class="option" data-answer="a" onclick="selectOption(this, 15)"><span class="option-letter">A</span><span class="option-text">Siento que mi cuerpo no procesa bien lo que como. Aunque como sano, el peso no baja.</span></button>
+        <button class="option" data-answer="b" onclick="selectOption(this, 15)"><span class="option-letter">B</span><span class="option-text">Siento que el estrés y el agotamiento son los protagonistas. El cuerpo va por inercia.</span></button>
+        <button class="option" data-answer="c" onclick="selectOption(this, 15)"><span class="option-letter">C</span><span class="option-text">Siento que mi cuerpo cambió de golpe y ya no lo reconozco. Todo es diferente a lo que era.</span></button>
+      </div>
+    </div>
+
+    <!-- Perfiles bloqueados -->
+    <div class="result-teaser">
+      <div class="result-teaser-title">Los 3 perfiles metabólicos</div>
+      <div class="result-teaser-sub">Completá el test para descubrir cuál es el tuyo</div>
+      <div class="profiles-grid">
+        <div class="profile-card a">
+          <div class="profile-card-icon">🔶</div>
+          <div class="profile-card-name">Perfil A — Insulino-Resistente</div>
+          <div class="profile-card-desc">Estrategia de nutrición y movimiento específica para este perfil</div>
+        </div>
+        <div class="profile-card b">
+          <div class="profile-card-icon">🔷</div>
+          <div class="profile-card-name">Perfil B — Cortisol Dominante</div>
+          <div class="profile-card-desc">Plan de sueño, estrés y alimentación para este perfil</div>
+        </div>
+        <div class="profile-card c">
+          <div class="profile-card-icon">🔸</div>
+          <div class="profile-card-name">Perfil C — Transición Hormonal</div>
+          <div class="profile-card-desc">Soporte hormonal y metabolismo en esta etapa específica</div>
+        </div>
+      </div>
+      <div class="profiles-unlock">Tu perfil se revela al completar las 15 preguntas</div>
+    </div>
+
+    <!-- Submit -->
+    <div class="submit-section">
+      <button class="btn-submit" id="submit-btn" onclick="showResult()" disabled>
+        Ver mi perfil metabólico →
+      </button>
+      <div class="submit-note" id="submit-note">Respondé todas las preguntas para ver tu resultado</div>
+    </div>
+
+  </div>
+  <!-- end test-screen -->
+
+  <!-- ── RESULT SCREEN ── -->
+  <div id="result-screen">
+    <div id="result-content"></div>
+
+    <div class="cta-section">
+      <div class="cta-eyebrow">Tu siguiente paso</div>
+      <div class="cta-title">Ahora que sabés tu perfil,<br><em>actuá en consecuencia</em></div>
+      <div class="cta-body">El test te mostró el diagnóstico. Metabólica 40+ te da el plan completo: la estrategia específica para tu perfil, el plan de 30 días y las herramientas para sostenerlo en el tiempo.</div>
+      <div class="cta-includes">
+        <div class="cta-include-item">Ebook completo: 4 bloques + plan de 30 días</div>
+        <div class="cta-include-item">Bonus 1: Guía de la Inflamación Oculta</div>
+        <div class="cta-include-item">Bonus 2: Test de Perfil completo con estrategia detallada</div>
+        <div class="cta-include-item">Bonus 3: Guía de lectura de etiquetas</div>
+      </div>
+      <div class="cta-price-row">
+        <div class="cta-price-old">Valor total del paquete: $73</div>
+        <div class="cta-price"><sup>$</sup>27</div>
+        <div class="cta-price-note">Descarga inmediata · Acceso de por vida</div>
+      </div>
+      <a href="TU_LINK_DE_HOTMART_AQUÍ" class="btn-primary" target="_blank">
+        Quiero Metabólica 40+ por $27 →
+      </a>
+      <div class="cta-guarantee">✓ Garantía de 7 días · Pago 100% seguro vía Hotmart</div>
+    </div>
+
+  </div>
+  <!-- end result-screen -->
+
+  <footer>
+    <p>© 2025 Mujer Plena 40+ · Todos los derechos reservados<br>
+    Este test tiene fines educativos y orientativos. No constituye diagnóstico médico.<br>
+    <a href="#">Política de privacidad</a> · <a href="#">Contacto</a></p>
+  </footer>
+</div>
+
+<!-- Sticky CTA -->
+<div class="sticky-cta" id="sticky-cta">
+  <div class="sticky-cta-text">
+    <strong>Metabólica 40+ — $27</strong>
+    Plan completo para tu perfil metabólico
+  </div>
+  <a href="TU_LINK_DE_HOTMART_AQUÍ" class="sticky-btn" target="_blank">Comprar ahora →</a>
+</div>
+
+<script>
+  const answers = {};
+
+  function selectOption(btn, qNum) {
+    const card = btn.closest('.question-card');
+    card.querySelectorAll('.option').forEach(o => {
+      o.classList.remove('selected-a', 'selected-b', 'selected-c');
+    });
+    const answer = btn.dataset.answer;
+    btn.classList.add('selected-' + answer);
+    answers[qNum] = answer;
+    updateTracker();
+    updateProgress();
+    checkSubmit();
+  }
+
+  function updateTracker() {
+    let a=0, b=0, c=0;
+    Object.values(answers).forEach(v => {
+      if(v==='a') a++;
+      else if(v==='b') b++;
+      else c++;
+    });
+    document.getElementById('count-a').textContent = a;
+    document.getElementById('count-b').textContent = b;
+    document.getElementById('count-c').textContent = c;
+  }
+
+  function updateProgress() {
+    const total = Object.keys(answers).length;
+    document.getElementById('progress-fill').style.width = (total/15*100) + '%';
+  }
+
+  function checkSubmit() {
+    const total = Object.keys(answers).length;
+    const btn = document.getElementById('submit-btn');
+    const note = document.getElementById('submit-note');
+    if(total === 15) {
+      btn.disabled = false;
+      note.textContent = '¡Completaste todas las preguntas! Ya podés ver tu resultado.';
+      note.style.color = '#6B8F71';
+    } else {
+      note.textContent = `Respondiste ${total} de 15 preguntas`;
+    }
+  }
+
+  function showResult() {
+    let a=0, b=0, c=0;
+    Object.values(answers).forEach(v => {
+      if(v==='a') a++;
+      else if(v==='b') b++;
+      else c++;
+    });
+
+    let dominant = 'a';
+    if(b > a && b >= c) dominant = 'b';
+    else if(c > a && c > b) dominant = 'c';
+
+    const profiles = {
+      a: {
+        badge: 'Tu perfil dominante',
+        title: 'Perfil A — Metabolismo Insulino-Resistente',
+        icon: '🔶',
+        class: 'profile-a',
+        intro: 'Tu metabolismo tiene dificultades para procesar los carbohidratos y el azúcar con eficiencia. Los picos de glucosa explican tus bajones de energía y tus antojos de dulce por la tarde. La buena noticia: este perfil responde muy bien a cambios específicos en la alimentación.',
+        traits: [
+          'Acumulación de grasa abdominal aunque no comas en exceso',
+          'Antojos intensos de dulce o carbohidratos, especialmente por la tarde',
+          'Energía baja después de las comidas, especialmente al mediodía',
+          'Hinchazón frecuente que mejora cuando reducís los carbohidratos refinados',
+        ],
+      },
+      b: {
+        badge: 'Tu perfil dominante',
+        title: 'Perfil B — Metabolismo Dominado por Cortisol',
+        icon: '🔷',
+        class: 'profile-b',
+        intro: 'Tu principal saboteador metabólico es el estrés crónico y el cortisol elevado. Tu cuerpo vive en modo alerta, lo que frena la quema de grasa y promueve la acumulación abdominal. El sueño y la gestión del estrés son tu palanca más poderosa.',
+        traits: [
+          'Agotamiento crónico que no mejora con el descanso',
+          'Comer por ansiedad o como forma de calmarte',
+          'Sueño fragmentado o dificultad para conciliarlo',
+          'El ejercicio intenso te deja peor, no mejor',
+        ],
+      },
+      c: {
+        badge: 'Tu perfil dominante',
+        title: 'Perfil C — Metabolismo en Transición Hormonal',
+        icon: '🔸',
+        class: 'profile-c',
+        intro: 'Estás en plena perimenopausia o transición: el estrógeno fluctúa y el cuerpo cambia rápido. La variabilidad es la norma en este perfil. Lo que funcionaba antes puede no funcionar ahora, y eso es completamente normal. Hay estrategias específicas para esta etapa.',
+        traits: [
+          'Síntomas que van y vienen sin patrón fijo',
+          'Sofocos, sudores nocturnos o cambios de temperatura',
+          'Ciclo menstrual irregular o en proceso de desaparecer',
+          'Cambios en piel, cabello y composición corporal simultáneos',
+        ],
+      }
+    };
+
+    const prof = profiles[dominant];
+    const html = `
+      <div style="text-align:center; margin-bottom:40px;">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:clamp(32px,5vw,48px); font-weight:600; color:var(--bark); margin-bottom:12px;">Tu resultado está listo</div>
+        <div style="font-size:16px; color:var(--text-secondary);">Basado en tus ${Object.keys(answers).length} respuestas · Perfil A: ${a} · Perfil B: ${b} · Perfil C: ${c}</div>
+      </div>
+
+      <div class="result-profile ${prof.class}">
+        <div class="result-badge">${prof.badge}</div>
+        <div style="font-size:40px; margin-bottom:12px;">${prof.icon}</div>
+        <div class="result-title">${prof.title}</div>
+        <div class="result-intro">${prof.intro}</div>
+        <div class="result-traits">
+          <div class="result-traits-title">Tus señales características</div>
+          ${prof.traits.map(t=>`<div class="trait-item"><div class="trait-dot"></div><span>${t}</span></div>`).join('')}
+        </div>
+      </div>
+
+      <div class="result-locked">
+        <div class="result-locked-title">🔒 Esto es solo el diagnóstico</div>
+        <div class="result-locked-text">La estrategia completa para tu perfil — qué comer, cómo moverte, cómo dormir mejor y el plan de 30 días específico — está en Metabólica 40+.</div>
+        <div class="lock-items">
+          <div class="lock-item">Tu protocolo de alimentación para el Perfil ${dominant.toUpperCase()}</div>
+          <div class="lock-item">El tipo de ejercicio que funciona para tu perfil</div>
+          <div class="lock-item">Los 3 hábitos prioritarios según tu resultado</div>
+          <div class="lock-item">Plan de 30 días adaptado a tu perfil metabólico</div>
+        </div>
+      </div>
+    `;
+
+    document.getElementById('result-content').innerHTML = html;
+    document.getElementById('test-screen').style.display = 'none';
+    document.getElementById('result-screen').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('sticky-cta').classList.add('visible');
+  }
+
+  // Sticky CTA on scroll
+  window.addEventListener('scroll', () => {
+    const sticky = document.getElementById('sticky-cta');
+    if(window.scrollY > 600) sticky.classList.add('visible');
+    else if(!document.getElementById('result-screen').style.display || document.getElementById('result-screen').style.display === 'none') {
+      sticky.classList.remove('visible');
+    }
+  });
+</script>
+</body>
+</html>
